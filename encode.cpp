@@ -16,7 +16,6 @@ void encode(string& encode, string& to, const string& key){
 	for (size_t n = 0; n < encode_size; n++)
 		if (is_alpha(encode[n]))
 			encode_lower += tolower(encode[n]);
-	size_t lower_size = encode_lower.size();
 	size_t j = 0;
 	for (size_t n = 0; n < encode_size; n++)
 	{
@@ -37,31 +36,31 @@ void encode(string& encode, string& to, const string& key){
 	}
 }
 
-void decode(const string& encoded, const string& key){
-	size_t len = key.size();
-	size_t encoded_length = encoded.length();
-	string rval;
-	string alphabet = "abcdefghijklmnopqrstuvwxyz";
-	size_t j = 0;
-	for (size_t n = 0; n < encoded_length; n++)
-	{
-		if (!is_alpha(encoded[n]))
-		{
-			rval += encoded[n];
-			continue;
-		}
-		int offset = key[j % len] - 'a';
-		if (encoded[n] - offset < 'a')
-		{
-			int overflow = 'a' - encoded[n] + offset;
-			rval += alphabet[26 - overflow];
-		}
-		else
-			rval += encoded[n] - offset;
-		j++;
-	}
-	cout << rval << endl;
-}
+// void decode(const string& encoded, const string& key){
+// 	size_t len = key.size();
+// 	size_t encoded_length = encoded.length();
+// 	string rval;
+// 	string alphabet = "abcdefghijklmnopqrstuvwxyz";
+// 	size_t j = 0;
+// 	for (size_t n = 0; n < encoded_length; n++)
+// 	{
+// 		if (!is_alpha(encoded[n]))
+// 		{
+// 			rval += encoded[n];
+// 			continue;
+// 		}
+// 		int offset = key[j % len] - 'a';
+// 		if (encoded[n] - offset < 'a')
+// 		{
+// 			int overflow = 'a' - encoded[n] + offset;
+// 			rval += alphabet[26 - overflow];
+// 		}
+// 		else
+// 			rval += encoded[n] - offset;
+// 		j++;
+// 	}
+// 	cout << rval << endl;
+// }
 
 int main(int ac, char** av)
 {
@@ -74,7 +73,6 @@ int main(int ac, char** av)
 	ostringstream sstr;
 	sstr << file.rdbuf();
 	string content = sstr.str();
-	size_t content_length = content.length();
 
 	string key(av[2]);
 	string encoded;

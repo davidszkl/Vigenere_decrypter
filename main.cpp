@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <cmath>
 
-#define E_FREQ 0.17110
+#define COMMON_FREQ 0.17110
 
 using namespace std;
 using std::string;
@@ -58,7 +58,7 @@ float get_error_mean(vector<map<char, float> >& freq){
 	float error = 0;
 	size_t freq_size = freq.size();
 	for (size_t i = 0; i < freq_size; i++)
-		error += abs(get_max(freq[i]) - E_FREQ);
+		error += abs(get_max(freq[i]) - COMMON_FREQ);
 	return error / freq_size;
 }
 
